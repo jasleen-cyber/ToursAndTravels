@@ -42,22 +42,28 @@ app.get("/api/v1/tours/:id", (req, res) => {
 
 //adding new tour
 app.post("/api/v1/tours", (req, res) => {
- /*  l(req.body);
+  /*  l(req.body);
   res.send("DONE"); */
-  const newId = [tours.length - 1].id +1 ;
-  // + 1 constant type ko numeric banane k lie 
+  //let id = req.params.id;
+  const newId = tours[tours.length - 1].id + 1;
+  // + 1 constant type ko numeric banane k lie
 
-  const newTour = Object.assign({"id" : newId }, req.body);
+  const newTour = Object.assign({ id: newId }, req.body);
   //Object.assign to merge two objects into one
   tours.push(newTour);
   //tours.push : pushes new tour to the array constanr tours , basically adds new tour to the variable
-  fs.writeFileSync(`${__dirname}/dev-data/data/tours-simple.json`, JSON.stringify(tours), (err) =>{
-    res.status(201).JSON({
-        status : "success",
-        tours : newTour
-    })
-  } )
-
+  fs.writeFile(
+    `${__dirname}/dev-data/data/tours-simple.json`,
+    JSON.stringify(tours),
+    (err) => {
+      res.status(201).json({
+        status: "success",
+        data: {
+          tour: newTour,
+        },
+      });
+    }
+  );
 });
 
 const port = 3000;
