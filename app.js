@@ -1,74 +1,72 @@
-
 const express = require("express");
 const app = express();
 const fs = require("fs");
 
-const l = console.log ;
+const l = console.log;
 app.use(express.json());
 
+const tours = JSON.parse(
+  fs.readFileSync("./dev-data/data/tours-simple.json", "utf-8")
+);
 
-
-
-const tours = JSON.parse(fs.readFileSync("./dev-data/data/tours-simple.json","utf-8"));
-
-app.get('/',(req,res)=>{
-
-//res.status(200).send("hello from the server babe")
-res.status(200).json({message : "hello from the server babe"}) ;
-
-
-})
-app.post('/',(req,res)=>{
-
-    res.status(200).send("hello from the server babe")
-
-})
+app.get("/", (req, res) => {
+  //res.status(200).send("hello from the server babe")
+  res.status(200).json({ message: "hello from the server babe" });
+});
+app.post("/", (req, res) => {
+  res.status(200).send("you can post here");
+});
 
 //to get all tours
-app.get('/api/v1/tours',(req,res)=>{
-    res.status(200).json({
-        status : "success",
-        message : {
-            tours : tours
-        }
-})
-})
+app.get("/api/v1/tours", (req, res) => {
+  res.status(200).json({
+    status: "success",
+    message: {
+      tours: tours,
+    },
+  });
+});
 
 //get one tour
-app.get('/api/v1/tours/:id',(req,res)=>{
-   let id = req.params.id * 1;
-   l(id);
-    const tour = tours.find(el => el.id === id)
-    res.status(200).json({
-        status : "success",
-        data : {
-            tours : tour
-        }
-})
-})
-
-
+app.get("/api/v1/tours/:id", (req, res) => {
+  let id = req.params.id * 1;
+  l(id);
+  const tour = tours.find((el) => el.id === id);
+  res.status(200).json({
+    status: "success",
+    data: {
+      tours: tour,
+    },
+  });
+});
 
 //adding new tour
-app.post('/api/v1/tours',(req,res)=>{
-    
-    l(req.body);
-    res.send('DONE');
-    /* res.status(200).json({
+app.post("/api/v1/tours", (req, res) => {
+ /*  l(req.body);
+  res.send("DONE"); */
+  const newId = [tours.length - 1].id +1 ;
+  // + 1 constant type ko numeric banane k lie 
+
+  const newTour = Object.assign({"id" : newId }, req.body);
+  //Object.assign to merge two objects into one
+  tours.push(newTour);
+  //tours.push : pushes new tour to the array constanr tours , basically adds new tour to the variable
+  fs.writeFileSync(`${__dirname}/dev-data/data/tours-simple.json`, JSON.stringify(tours), (err) =>{
+    res.status(201).JSON({
+        status : "success",
+        tours : newTour
+    })
+  } )
+/*   tours[tours.length+1] = newTour;  */
+  //fs.appendFileSync("./dev-data/data/tours-simple.json",req.body);
+ /*  res.status(200).json({
         status : "success",
         message : {
-            tours : tours[req.id]
-            tours : tours[tours.length-1].id
-        } })*/
-
-
-
-})
-
-
-
+            tours :
+        } }) */
+});
 
 const port = 3000;
-app.listen(port,()=> {
-    l(`app is running on port ${port}`);
-})
+app.listen(port, () => {
+  l(`app is running on port ${port}`);
+});
