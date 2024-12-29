@@ -57,13 +57,7 @@ app.post("/api/v1/tours", (req, res) => {
         tours : newTour
     })
   } )
-/*   tours[tours.length+1] = newTour;  */
-  //fs.appendFileSync("./dev-data/data/tours-simple.json",req.body);
- /*  res.status(200).json({
-        status : "success",
-        message : {
-            tours :
-        } }) */
+
 });
 
 const port = 3000;
