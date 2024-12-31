@@ -66,6 +66,25 @@ app.post("/api/v1/tours", (req, res) => {
   );
 });
 
+const newTour = Object.assign({ id: newId }, req.body);
+  //Object.assign to merge two objects into one
+  tours.push(newTour);
+  //tours.push : pushes new tour to the array constanr tours , basically adds new tour to the variable
+  fs.writeFile(
+    `${__dirname}/dev-data/data/tours-simple.json`,
+    JSON.stringify(tours),
+    (err) => {
+      res.status(201).json({
+        status: "success",
+        data: {
+          tour: newTour,
+        },
+      });
+    }
+  );
+});
+
+
 const port = 3000;
 app.listen(port, () => {
   l(`app is running on port ${port}`);
