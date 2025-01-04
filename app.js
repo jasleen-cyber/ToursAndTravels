@@ -82,7 +82,7 @@ const newTour = Object.assign({ id: newId }, req.body);
       });
     }
   );
-});
+
 
 
 const port = 3000;
