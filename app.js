@@ -1,7 +1,6 @@
 const express = require("express");
-const app = express();
+const app = express(); //app variable s server banta h
 const fs = require("fs");
-
 const l = console.log;
 app.use(express.json());
 
@@ -66,24 +65,22 @@ app.post("/api/v1/tours", (req, res) => {
   );
 });
 
-const newTour = Object.assign({ id: newId }, req.body);
-  //Object.assign to merge two objects into one
-  tours.push(newTour);
-  //tours.push : pushes new tour to the array constanr tours , basically adds new tour to the variable
-  fs.writeFile(
-    `${__dirname}/dev-data/data/tours-simple.json`,
-    JSON.stringify(tours),
-    (err) => {
-      res.status(201).json({
-        status: "success",
-        data: {
-          tour: newTour,
-        },
-      });
+app.patch("/api/v1/tours/:id", (req, res) => {
+  const id = req.params.id * 1;
+  if (id > tours.length) {
+    res.status(400).json({
+      status: "fail",
+      message: "invalid id",
+    });
+  }
+
+  res.status(200).json({
+    status: "success",
+    data: {
+      tours: "<updated tour here>"
     }
-  );
-
-
+  });
+});
 
 const port = 3000;
 app.listen(port, () => {
