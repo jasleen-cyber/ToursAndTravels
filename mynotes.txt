@@ -56,3 +56,11 @@ instead of a JavaScript object.
 // replace karra h tours ko tours-simple.json file mai
 and uske lie , tours jo ki js object converted to js array h usko wapis JSON.stringify s JSON m convert karne k lie 
 and call back function in which it will send and display the new tour in the server.
+
+
+RESPONSE CODE 
+204 means no content
+201 means new created
+200 success
+404 error
+
