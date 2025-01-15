@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express(); //app variable s server banta h
 const fs = require("fs");
+const { join } = require("path");
 const l = console.log;
 app.use(express.json());
 
@@ -77,8 +78,8 @@ app.patch("/api/v1/tours/:id", (req, res) => {
   res.status(200).json({
     status: "success",
     data: {
-      tours: "<updated tour here>"
-    }
+      tours: "<updated tour here>",
+    },
   });
 });
 
@@ -87,7 +88,7 @@ app.delete("/api/v1/tours/:id", (req, res) => {
   if (id > tours.length) {
     res.status(400).json({
       status: "fail",
-      message: "invalid id",
+      message: "invalid id"
     });
   }
 
@@ -97,7 +98,7 @@ app.delete("/api/v1/tours/:id", (req, res) => {
   });
 });
 
-const port = 3000;
+const port = 4000;
 app.listen(port, () => {
   l(`app is running on port ${port}`);
 });
