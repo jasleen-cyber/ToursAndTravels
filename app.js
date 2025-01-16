@@ -88,17 +88,17 @@ app.delete("/api/v1/tours/:id", (req, res) => {
   if (id > tours.length) {
     res.status(400).json({
       status: "fail",
-      message: "invalid id"
+      message: "invalid id",
     });
   }
 
   res.status(204).json({
     status: "success",
-    data: null
+    data: null,
   });
 });
 
-const port = 4000;
+const port = 3000;
 app.listen(port, () => {
   l(`app is running on port ${port}`);
 });
