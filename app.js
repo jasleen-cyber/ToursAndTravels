@@ -73,6 +73,17 @@ app.patch("/api/v1/tours/:id", (req, res) => {
       status: "fail",
       message: "invalid id",
     });
+
+  }
+
+
+app.patch("/api/v1/tours/:id", (req, res) => {
+  const id = req.params.id * 1;
+  if (id > tours.length) {
+    res.status(400).json({
+      status: "fail",
+      message: "invalid id",
+    });
   }
 
   res.status(200).json({
