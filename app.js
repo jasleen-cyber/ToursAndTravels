@@ -27,6 +27,17 @@ app.get("/api/v1/tours", (req, res) => {
   });
 });
 
+//to get all tours
+app.get("/api/v1/tours", (req, res) => {
+  res.status(200).json({
+    status: "success",
+    message: {
+      tours: tours,
+    },
+  });
+});
+
+
 //get one tour
 app.get("/api/v1/tours/:id", (req, res) => {
   let id = req.params.id * 1;
