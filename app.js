@@ -17,29 +17,23 @@ app.post("/", (req, res) => {
   res.status(200).send("you can post here");
 });
 
-//to get all tours
-app.get("/api/v1/tours", (req, res) => {
-  res.status(200).json({
-    status: "success",
-    message: {
-      tours: tours,
-    },
-  });
-});
+
 
 //to get all tours
-app.get("/api/v1/tours", (req, res) => {
+
+const getAllTours = (req, res) => {
   res.status(200).json({
     status: "success",
     message: {
       tours: tours,
     },
   });
-});
+};
+
 
 
 //get one tour
-app.get("/api/v1/tours/:id", (req, res) => {
+const getTour = (req, res) => {
   let id = req.params.id * 1;
   l(id);
   const tour = tours.find((el) => el.id === id);
@@ -49,10 +43,11 @@ app.get("/api/v1/tours/:id", (req, res) => {
       tours: tour,
     },
   });
-});
+}
+
 
 //adding new tour
-app.post("/api/v1/tours", (req, res) => {
+const newTour = (req, res) => {
   /*  l(req.body);
   res.send("DONE"); */
   //let id = req.params.id;
@@ -75,20 +70,10 @@ app.post("/api/v1/tours", (req, res) => {
       });
     }
   );
-});
-
-app.patch("/api/v1/tours/:id", (req, res) => {
-  const id = req.params.id * 1;
-  if (id > tours.length) {
-    res.status(400).json({
-      status: "fail",
-      message: "invalid id",
-    });
-
-  }
+};
 
 
-app.patch("/api/v1/tours/:id", (req, res) => {
+const updateTour = (req, res) => {
   const id = req.params.id * 1;
   if (id > tours.length) {
     res.status(400).json({
@@ -103,19 +88,10 @@ app.patch("/api/v1/tours/:id", (req, res) => {
       tours: "<updated tour here>",
     },
   });
-});
+};
 
 
-  pp.delete("/api/v1/tours/:id", (req, res) => {
-    const id = req.params.id * 1;
-    if (id > tours.length) {
-      res.status(400).json({
-        status: "fail",
-        message: "invalid id",
-      });
-    }
-  
-app.delete("/api/v1/tours/:id", (req, res) => {
+const deleteTour = (req, res) => {
   const id = req.params.id * 1;
   if (id > tours.length) {
     res.status(400).json({
@@ -128,25 +104,17 @@ app.delete("/api/v1/tours/:id", (req, res) => {
     status: "success",
     data: null,
   });
-});
+};
+app.get("/api/v1/tours", getAllTours);
+app.get("/api/v1/tours/:id", getTour);
+app.post("/api/v1/tours",newTour );
+app.patch("/api/v1/tours/:id",updateTour );
+app.delete("/api/v1/tours/:id", deleteTour);
 
-const id = req.params.id * 1;
-if (id > tours.length) {
-  res.status(400).json({
-    status: "fail",
-    message: "invalid id",
-  });
-}
+app.route("/api/v1/tours").get(getAllTours).post(newTour);
+app.route("/api/v1/tours/:id").get(getTour).patch(updateTour).delete(deleteTour);
 
-res.status(204).json({
-  status: "success",
-  data: null,
-});
-});
-jhgjkhgkj
-
-
-const port = 3000;
+const port = 8000;
 app.listen(port, () => {
   l(`app is running on port ${port}`);
 });
