@@ -3,6 +3,8 @@ const app = express(); //app variable s server banta h
 const fs = require("fs");
 const { join } = require("path");
 const l = console.log;
+
+//middleware used for parsing data
 app.use(express.json());
 
 const tours = JSON.parse(
@@ -17,8 +19,6 @@ app.post("/", (req, res) => {
   res.status(200).send("you can post here");
 });
 
-
-
 //to get all tours
 
 const getAllTours = (req, res) => {
@@ -29,8 +29,6 @@ const getAllTours = (req, res) => {
     },
   });
 };
-
-
 
 //get one tour
 const getTour = (req, res) => {
@@ -43,8 +41,7 @@ const getTour = (req, res) => {
       tours: tour,
     },
   });
-}
-
+};
 
 //adding new tour
 const newTour = (req, res) => {
@@ -72,7 +69,6 @@ const newTour = (req, res) => {
   );
 };
 
-
 const updateTour = (req, res) => {
   const id = req.params.id * 1;
   if (id > tours.length) {
@@ -90,7 +86,6 @@ const updateTour = (req, res) => {
   });
 };
 
-
 const deleteTour = (req, res) => {
   const id = req.params.id * 1;
   if (id > tours.length) {
@@ -107,12 +102,20 @@ const deleteTour = (req, res) => {
 };
 app.get("/api/v1/tours", getAllTours);
 app.get("/api/v1/tours/:id", getTour);
-app.post("/api/v1/tours",newTour );
-app.patch("/api/v1/tours/:id",updateTour );
+app.post("/api/v1/tours", newTour);
+app.patch("/api/v1/tours/:id", updateTour);
 app.delete("/api/v1/tours/:id", deleteTour);
 
 app.route("/api/v1/tours").get(getAllTours).post(newTour);
-app.route("/api/v1/tours/:id").get(getTour).patch(updateTour).delete(deleteTour);
+app
+  .route("/api/v1/tours/:id")
+  .get(getTour)
+  .patch(updateTour)
+  .delete(deleteTour);
+
+
+
+
 
 const port = 8000;
 app.listen(port, () => {

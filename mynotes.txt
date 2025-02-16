@@ -63,4 +63,23 @@ RESPONSE CODE
 201 means new created
 200 success
 404 error
+500 internal error / not implemented
+
+morgan is a logging tool 
+
+it will display whateve is in request in console
+
+The express.json() function is a built-in middleware in Express that is used for parsing incoming requests with JSON payload.
+ The express.json middleware is important for parsing incoming JSON payloads and
+  making that data available in the req.body or further processing within the routes. 
+  Without using express.json, 
+Express will not automatically parse the JSON data in the request body.
+
+
+route handleres are middlewarees as well
+they are middleware that only applies to certain URLs 
+
+
+
+
 
