@@ -5,7 +5,18 @@ const { join } = require("path");
 const l = console.log;
 
 //middleware used for parsing data
+// below middleware is used in add new  tour
 app.use(express.json());
+
+app.use((req, res, next)=>{
+  l("helou from the middleware siiide 📸")
+  next();
+})
+
+app.use((req, res, next)=>{
+  req.requestTime = new Date().toISOString();
+  next();
+})
 
 const tours = JSON.parse(
   fs.readFileSync("./dev-data/data/tours-simple.json", "utf-8")
@@ -22,8 +33,10 @@ app.post("/", (req, res) => {
 //to get all tours
 
 const getAllTours = (req, res) => {
+  l(req.requestTime);
   res.status(200).json({
     status: "success",
+    RequestedTime : req.requestTime,
     message: {
       tours: tours,
     },
@@ -51,6 +64,7 @@ const newTour = (req, res) => {
   const newId = tours[tours.length - 1].id + 1;
   // + 1 constant type ko numeric banane k lie
 
+  //json which we are adding in postman can only gets read and added with middleware 
   const newTour = Object.assign({ id: newId }, req.body);
   //Object.assign to merge two objects into one
   tours.push(newTour);
@@ -100,11 +114,12 @@ const deleteTour = (req, res) => {
     data: null,
   });
 };
-app.get("/api/v1/tours", getAllTours);
+
+/* app.get("/api/v1/tours", getAllTours);
 app.get("/api/v1/tours/:id", getTour);
 app.post("/api/v1/tours", newTour);
 app.patch("/api/v1/tours/:id", updateTour);
-app.delete("/api/v1/tours/:id", deleteTour);
+app.delete("/api/v1/tours/:id", deleteTour); */
 
 app.route("/api/v1/tours").get(getAllTours).post(newTour);
 app
@@ -112,10 +127,6 @@ app
   .get(getTour)
   .patch(updateTour)
   .delete(deleteTour);
-
-
-
-
 
 const port = 8000;
 app.listen(port, () => {
