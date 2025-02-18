@@ -80,6 +80,18 @@ route handleres are middlewarees as well
 they are middleware that only applies to certain URLs 
 
 
+routes are also can be called controllers
+
+route('/')  -> this means we are at the root of the URLs
+
+
+app.use('/api/v1/tours' , tourRouter)
+// syntax is app.use((route),(route handler));
+
+
+
+
+
 
 
 

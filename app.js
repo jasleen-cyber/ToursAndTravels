@@ -2,21 +2,25 @@ const express = require("express");
 const app = express(); //app variable s server banta h
 const fs = require("fs");
 const { join } = require("path");
+const morgan = require("morgan");
 const l = console.log;
 
 //middleware used for parsing data
-// below middleware is used in add new  tour
+// below middleware is used in add new tour
 app.use(express.json());
 
-app.use((req, res, next)=>{
-  l("helou from the middleware siiide 📸")
-  next();
-})
+app.use(morgan("dev"));
+// morgan logs : GET /api/v1/tours 200 8.400 ms - 11459
 
-app.use((req, res, next)=>{
+app.use((req, res, next) => {
+  l("helou from the middleware siiide 📸");
+  next();
+});
+
+app.use((req, res, next) => {
   req.requestTime = new Date().toISOString();
   next();
-})
+});
 
 const tours = JSON.parse(
   fs.readFileSync("./dev-data/data/tours-simple.json", "utf-8")
@@ -36,7 +40,7 @@ const getAllTours = (req, res) => {
   l(req.requestTime);
   res.status(200).json({
     status: "success",
-    RequestedTime : req.requestTime,
+    RequestedTime: req.requestTime,
     message: {
       tours: tours,
     },
@@ -64,7 +68,7 @@ const newTour = (req, res) => {
   const newId = tours[tours.length - 1].id + 1;
   // + 1 constant type ko numeric banane k lie
 
-  //json which we are adding in postman can only gets read and added with middleware 
+  //json which we are adding in postman can only gets read and added with middleware
   const newTour = Object.assign({ id: newId }, req.body);
   //Object.assign to merge two objects into one
   tours.push(newTour);
@@ -115,6 +119,40 @@ const deleteTour = (req, res) => {
   });
 };
 
+const getAllUsers = (req, res) => {
+  res.status(500).json({
+    status: "error",
+    message: "This route is not yet defined",
+  });
+};
+
+const newUser = (req, res) => {
+  res.status(500).json({
+    status: "error",
+    message: "This route is not yet defined",
+  });
+};
+
+const getUser = (req, res) => {
+  res.status(500).json({
+    status: "error",
+    message: "This route is not yet defined",
+  });
+};
+
+const updateUser = (req, res) => {
+  res.status(500).json({
+    status: "error",
+    message: "This route is not yet defined",
+  });
+};
+
+const deleteUser = (req, res) => {
+  res.status(500).json({
+    status: "error",
+    message: "This route is not yet defined",
+  });
+};
 /* app.get("/api/v1/tours", getAllTours);
 app.get("/api/v1/tours/:id", getTour);
 app.post("/api/v1/tours", newTour);
@@ -127,6 +165,14 @@ app
   .get(getTour)
   .patch(updateTour)
   .delete(deleteTour);
+
+app.route("/api/v1/users").get(getAllUsers).post(newUser);
+
+app
+  .route("/api/v1/users/:id")
+  .get(getUser)
+  .patch(updateUser)
+  .delete(deleteUser);
 
 const port = 8000;
 app.listen(port, () => {
