@@ -87,6 +87,8 @@ route('/')  -> this means we are at the root of the URLs
 
 app.use('/api/v1/tours' , tourRouter)
 // syntax is app.use((route),(route handler));
+// this above is called mounting a router , basically means mounting a router on a route
+
 
 
 
