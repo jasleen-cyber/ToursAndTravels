@@ -26,12 +26,12 @@ app.post("/", (req, res) => {
   res.status(200).send("you can post here");
 });
 
-app.get("/api/v1/tours", getAllTours);
+/* app.get("/api/v1/tours", getAllTours);
 app.get("/api/v1/tours/:id", getTour);
 app.post("/api/v1/tours", newTour);
 app.patch("/api/v1/tours/:id", updateTour);
 app.delete("/api/v1/tours/:id", deleteTour); 
-
+ */
 const port = 8000;
 app.listen(port, () => {
   l(`app is running on port ${port}`);
