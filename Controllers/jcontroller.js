@@ -87,6 +87,15 @@ exports.deleteTour = (req, res) => {
     });
   }
 
+  exports.deleteTour = (req, res) => {
+    const id = req.params.id * 1;
+    if (id > tours.length) {
+      res.status(400).json({
+        status: "fail",
+        message: "invalid id",
+      });
+    }
+
   res.status(204).json({
     status: "success",
     data: null,
