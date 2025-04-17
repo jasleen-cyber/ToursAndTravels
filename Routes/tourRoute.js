@@ -1,4 +1,4 @@
-const app = express(); //app variable s server banta h
+//const app = express(); //app variable s server banta h
 const tourController = require("./../Controllers/tourController");
 
 const Router = express.Router();

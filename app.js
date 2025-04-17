@@ -1,6 +1,11 @@
+const express = require("express");
 const { join } = require("path");
 const morgan = require("morgan");
-const app = express();
+const  app = express();
+
+app.use(express.json());
+
+
 
 //middleware used for parsing data
 // below middleware is used in add new tour
@@ -18,10 +23,13 @@ app.use((req, res, next) => {
   next();
 });
 
+
 app.get("/", (req, res) => {
   //res.status(200).send("hello from the server babe")
   res.status(200).json({ message: "hello from the server babe" });
 });
+
+
 app.post("/", (req, res) => {
   res.status(200).send("you can post here");
 });
@@ -32,7 +40,7 @@ app.post("/api/v1/tours", newTour);
 app.patch("/api/v1/tours/:id", updateTour);
 app.delete("/api/v1/tours/:id", deleteTour); 
  */
-const port = 8000;
-app.listen(port, () => {
-  l(`app is running on port ${port}`);
-});
+
+module.exports = app ;
+
+

@@ -6,7 +6,7 @@ const tours = JSON.parse(
   fs.readFileSync("./dev-data/data/tours-simple.json", "utf-8")
 );
 
-app.use(express.json());
+
 
 //to get all tours
 
