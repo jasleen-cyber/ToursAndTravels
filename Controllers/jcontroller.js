@@ -34,6 +34,34 @@ exports.getTour = (req, res) => {
   });
 };
 
+//get one tour
+exports.getTour = (req, res) => {
+  let id = req.params.id * 1;
+  l(id);
+  const tour = tours.find((el) => el.id === id);
+  res.status(200).json({
+    status: "success",
+    data: {
+      tours: tour,
+    },
+  });
+};
+
+
+//get one tour
+exports.getTour = (req, res) => {
+  let id = req.params.id * 1;
+  l(id);
+  const tour = tours.find((el) => el.id === id);
+  res.status(200).json({
+    status: "success",
+    data: {
+      tours: tour,
+    },
+  });
+};
+
+
 //adding new tour
 exports.newTour = (req, res) => {
   /*  l(req.body);
