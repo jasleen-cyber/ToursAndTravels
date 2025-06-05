@@ -137,6 +137,23 @@ exports.updateTour = (req, res) => {
   });
 };
 
+exports.updateTour = (req, res) => {
+  const id = req.params.id * 1;
+  if (id > tours.length) {
+    res.status(400).json({
+      status: "fail",
+      message: "invalid id",
+    });
+  }
+
+  res.status(200).json({
+    status: "success",
+    data: {
+      tours: "<updated tour here>",
+    },
+  });
+};
+
 exports.deleteTour = (req, res) => {
   const id = req.params.id * 1;
   if (id > tours.length) {
