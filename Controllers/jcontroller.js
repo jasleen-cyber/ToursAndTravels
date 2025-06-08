@@ -120,56 +120,7 @@ exports.updateTour = (req, res) => {
   });
 };
 
-exports.updateTour = (req, res) => {
-  const id = req.params.id * 1;
-  if (id > tours.length) {
-    res.status(400).json({
-      status: "fail",
-      message: "invalid id",
-    });
-  }
 
-  res.status(200).json({
-    status: "success",
-    data: {
-      tours: "<updated tour here>",
-    },
-  });
-};
-
-exports.updateTour = (req, res) => {
-  const id = req.params.id * 1;
-  if (id > tours.length) {
-    res.status(400).json({
-      status: "fail",
-      message: "invalid id",
-    });
-  }
-
-  res.status(200).json({
-    status: "success",
-    data: {
-      tours: "<updated tour here>",
-    },
-  });
-};
-
-exports.updateTour = (req, res) => {
-  const id = req.params.id * 1;
-  if (id > tours.length) {
-    res.status(400).json({
-      status: "fail",
-      message: "invalid id",
-    });
-  }
-
-  res.status(200).json({
-    status: "success",
-    data: {
-      tours: "<updated tour here>",
-    },
-  });
-};
 
 exports.deleteTour = (req, res) => {
   const id = req.params.id * 1;
@@ -186,3 +137,38 @@ exports.deleteTour = (req, res) => {
     data: null,
   });
 };
+
+
+exports.deleteTour = (req, res) => {
+  const id = req.params.id * 1;
+  if (id > tours.length) {
+    res.status(400).json({
+      status: "fail",
+      message: "invalid id",
+    });
+  }
+
+
+  res.status(204).json({
+    status: "success",
+    data: null,
+  });
+};
+
+
+exports.deleteTour = (req, res) => {
+  const id = req.params.id * 1;
+  if (id > tours.length) {
+    res.status(400).json({
+      status: "fail",
+      message: "invalid id",
+    });
+  }
+
+
+  res.status(204).json({
+    status: "success",
+    data: null,
+  });
+};
+
