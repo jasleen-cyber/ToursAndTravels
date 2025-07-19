@@ -124,6 +124,74 @@ xports.getAllTours = (req, res) => {
   });
 };
 
+xports.getAllTours = (req, res) => {
+  l(req.requestTime);
+  res.status(200).json({
+    status: "success",
+    RequestedTime: req.requestTime,
+    message: {
+      tours: tours,
+    },
+  });
+};
+
+
+xports.getAllTours = (req, res) => {
+  l(req.requestTime);
+  res.status(200).json({
+    status: "success",
+    RequestedTime: req.requestTime,
+    message: {
+      tours: tours,
+    },
+  });
+};
+
+
+xports.getAllTours = (req, res) => {
+  l(req.requestTime);
+  res.status(200).json({
+    status: "success",
+    RequestedTime: req.requestTime,
+    message: {
+      tours: tours,
+    },
+  });
+};
+
+xports.getAllTours = (req, res) => {
+  l(req.requestTime);
+  res.status(200).json({
+    status: "success",
+    RequestedTime: req.requestTime,
+    message: {
+      tours: tours,
+    },
+  });
+};
+
+xports.getAllTours = (req, res) => {
+  l(req.requestTime);
+  res.status(200).json({
+    status: "success",
+    RequestedTime: req.requestTime,
+    message: {
+      tours: tours,
+    },
+  });
+};
+
+xports.getAllTours = (req, res) => {
+  l(req.requestTime);
+  res.status(200).json({
+    status: "success",
+    RequestedTime: req.requestTime,
+    message: {
+      tours: tours,
+    },
+  });
+};
+
 
 
 xports.getAllTours = (req, res) => {
